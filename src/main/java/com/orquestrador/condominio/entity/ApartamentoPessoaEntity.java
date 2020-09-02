@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -21,9 +20,6 @@ public class ApartamentoPessoaEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne
-	private PessoaEntity pessoaId;
-
-	@ManyToOne
-	private ApartamentoEntity apartamentoId;
+	private Long pessoaId;
+	private Long apartamentoId;
 }

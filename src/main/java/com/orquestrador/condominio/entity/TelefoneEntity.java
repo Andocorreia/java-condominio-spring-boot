@@ -6,11 +6,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.orquestrador.condominio.core.enums.TipoTelefone;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,16 +22,20 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class TelefoneEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@ManyToOne
+	@JoinColumn(name = "pessoaId")
+	private PessoaEntity pessoaId;
+
 	private String numero;
 
 	@Enumerated(EnumType.STRING)
 	private TipoTelefone tipo;
 
-	@ManyToOne
-	private PessoaEntity pessoaId;
 }
