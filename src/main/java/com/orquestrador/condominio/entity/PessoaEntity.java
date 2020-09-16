@@ -12,6 +12,8 @@ import javax.persistence.Table;
 
 import com.orquestrador.condominio.core.enums.Classificacao;
 import com.orquestrador.condominio.core.enums.EstadoCivil;
+import com.orquestrador.condominio.core.enums.Sexo;
+import com.orquestrador.condominio.core.enums.Situacao;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -38,7 +40,11 @@ public class PessoaEntity {
 	@Enumerated(EnumType.STRING)
 	private EstadoCivil estadoCivil;
 
+	private Sexo sexo;
 	private String email;
+
+	@Enumerated(EnumType.STRING)
+	private Situacao situacao;
 
 	@Enumerated(EnumType.STRING)
 	private Classificacao classificacao;

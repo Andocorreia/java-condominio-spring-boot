@@ -35,6 +35,8 @@ public class TelefoneEntity {
 
 	private String numero;
 
+	private String complemento;
+
 	@Enumerated(EnumType.STRING)
 	private TipoTelefone tipo;
 

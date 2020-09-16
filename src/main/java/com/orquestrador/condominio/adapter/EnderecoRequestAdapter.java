@@ -7,7 +7,7 @@ import com.orquestrador.condominio.core.enums.TipoEndereco;
 import com.orquestrador.condominio.entity.EnderecoEntity;
 import com.orquestrador.condominio.request.CadastroPessoaRequest;
 
-public class EnderecoAdapter implements Adapter<List<EnderecoEntity>, CadastroPessoaRequest> {
+public class EnderecoRequestAdapter implements Adapter<List<EnderecoEntity>, CadastroPessoaRequest> {
 
 	@Override
 	public List<EnderecoEntity> convert(final CadastroPessoaRequest request) {

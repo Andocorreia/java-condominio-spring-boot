@@ -6,7 +6,7 @@ import java.util.List;
 import com.orquestrador.condominio.entity.ApartamentoPessoaEntity;
 import com.orquestrador.condominio.request.CadastroPessoaRequest;
 
-public class ApartamentoPessoaAdapter implements Adapter<List<ApartamentoPessoaEntity>, CadastroPessoaRequest>{
+public class ApartamentoPessoaRequestAdapter implements Adapter<List<ApartamentoPessoaEntity>, CadastroPessoaRequest>{
 
 	@Override
 	public List<ApartamentoPessoaEntity> convert(final CadastroPessoaRequest request) {

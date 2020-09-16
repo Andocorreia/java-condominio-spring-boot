@@ -7,7 +7,7 @@ import com.orquestrador.condominio.core.enums.TipoTelefone;
 import com.orquestrador.condominio.entity.TelefoneEntity;
 import com.orquestrador.condominio.request.CadastroPessoaRequest;
 
-public class TelefoneAdapter implements Adapter< List<TelefoneEntity>, CadastroPessoaRequest>{
+public class TelefoneRequestAdapter implements Adapter< List<TelefoneEntity>, CadastroPessoaRequest>{
 
 	@Override
 	public List<TelefoneEntity> convert(final CadastroPessoaRequest request) {
@@ -17,6 +17,7 @@ public class TelefoneAdapter implements Adapter< List<TelefoneEntity>, CadastroP
 			final TelefoneEntity entity = new TelefoneEntity();
 			entity.setNumero(telefone.getNumero());
 			entity.setTipo(TipoTelefone.valueOf(telefone.getTipo().toUpperCase()));
+			entity.setComplemento(telefone.getComplemento());
 			telefoneEntity.add(entity);
 		});
 		return telefoneEntity;
