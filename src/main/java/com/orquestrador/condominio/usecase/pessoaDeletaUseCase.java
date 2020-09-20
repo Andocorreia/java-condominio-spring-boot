@@ -20,7 +20,7 @@ public class pessoaDeletaUseCase {
 
 		final Optional<PessoaEntity> pessoa = pessoaRepository.findById(pessoaId);
 
-		if(pessoa.isPresent()) {
+		if (pessoa.isPresent()) {
 
 			final PessoaEntity entity = pessoaRepository.getOne(pessoaId);
 			entity.setSituacao(Situacao.INATIVO);

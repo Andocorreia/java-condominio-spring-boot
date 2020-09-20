@@ -5,13 +5,16 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.orquestrador.condominio.adapter.ApartamentoAdapter;
 import com.orquestrador.condominio.adapter.EnderecoResponseAdapter;
 import com.orquestrador.condominio.adapter.PessoaResponseAdpter;
 import com.orquestrador.condominio.adapter.TelefoneResponseAdapter;
+import com.orquestrador.condominio.entity.ApartamentoEntity;
 import com.orquestrador.condominio.entity.ApartamentoPessoaEntity;
 import com.orquestrador.condominio.entity.EnderecoEntity;
 import com.orquestrador.condominio.entity.PessoaEntity;
@@ -25,6 +28,8 @@ import com.orquestrador.condominio.response.PessoaResponse;
 
 @Service
 public class PessoaConsultaUseCase {
+
+	private PessoaEntity pessoaEntity;
 
 	@Autowired
 	ApartamentoPessoaRepository apartamentoPessoaRepository;
@@ -44,33 +49,36 @@ public class PessoaConsultaUseCase {
 	public Collection<PessoaResponse> executa(final Long pessoaId) {
 		final Optional<PessoaEntity> pessoaOptional = pessoaRepository.findById(pessoaId);
 
-		if(!pessoaOptional.isPresent()) {
-
+		if (!pessoaOptional.isPresent()) {
 			return Collections.emptyList();
 		}
-
-		final PessoaEntity pessoaEntity = pessoaOptional.get();
+		pessoaEntity = pessoaOptional.get();
 
 		final PessoaResponse pessoaResponse = new PessoaResponseAdpter().convert(pessoaEntity);
 
-		final Collection<EnderecoEntity> enderecos =
-				enderecoRepository.findByPessoaId(pessoaEntity).orElse(Collections.emptyList());
-
-		final Collection<TelefoneEntity> telefones =
-				telefoneRepository.findByPessoaId(pessoaEntity).orElse(Collections.emptyList());
-
-		final Collection<ApartamentoPessoaEntity> apartamentos =
-				apartamentoPessoaRepository.findByPessoaId(pessoaId).orElse(Collections.emptyList());
+		final Collection<EnderecoEntity> enderecos = enderecoRepository.findByPessoaId(pessoaEntity).orElse(Collections.emptyList());
+		final Collection<TelefoneEntity> telefones = telefoneRepository.findByPessoaId(pessoaEntity).orElse(Collections.emptyList());
+		final Collection<ApartamentoPessoaEntity> apartamentoEntity =
+				apartamentoPessoaRepository.findByPessoaId(pessoaEntity.getId()).orElse(Collections.emptyList());
+		final Collection<ApartamentoEntity> apartamentos =
+				apartamentoRepository.findByIdIn(getApartamentosIds(apartamentoEntity)).orElse(Collections.emptyList());
 
 		pessoaResponse.setEnderecos(new EnderecoResponseAdapter().convert(enderecos));
 		pessoaResponse.setTelefones(new TelefoneResponseAdapter().convert(telefones));
+		pessoaResponse.setApartamentos(new ApartamentoAdapter().convert(apartamentos));
 
 		return Arrays.asList(pessoaResponse);
+	}
+
+	private List<Long> getApartamentosIds(final Collection<ApartamentoPessoaEntity> apartamentoEntity) {
+		return apartamentoEntity.stream().map(ApartamentoPessoaEntity::getApartamentoId).collect(Collectors.toList());
 	}
 
 	public Collection<PessoaResponse> executa() {
 		final List<PessoaEntity> pessoaEntity = pessoaRepository.findAll();
 		return new PessoaResponseAdpter().convert(pessoaEntity);
 	}
+
+
 
 }

@@ -5,12 +5,12 @@ import java.util.List;
 
 import com.orquestrador.condominio.core.enums.TipoEndereco;
 import com.orquestrador.condominio.entity.EnderecoEntity;
-import com.orquestrador.condominio.request.CadastroPessoaRequest;
+import com.orquestrador.condominio.request.CommonPessoaRequest;
 
-public class EnderecoRequestAdapter implements Adapter<List<EnderecoEntity>, CadastroPessoaRequest> {
+public class EnderecoRequestAdapter implements Adapter<List<EnderecoEntity>, CommonPessoaRequest> {
 
 	@Override
-	public List<EnderecoEntity> convert(final CadastroPessoaRequest request) {
+	public List<EnderecoEntity> convert(final CommonPessoaRequest request) {
 		final List<EnderecoEntity> enderecoEntity = new ArrayList<>();
 
 		request.getEnderecos().stream().forEach(endereco -> {

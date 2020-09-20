@@ -19,7 +19,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor(staticName = "of")
-public class CadastroPessoaRequest {
+public class CommonPessoaRequest {
 
 	@NotNull
 	@NotEmpty

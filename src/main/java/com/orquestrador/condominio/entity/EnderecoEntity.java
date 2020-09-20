@@ -18,11 +18,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="endereco")
-@Getter
-@Setter
-@NoArgsConstructor
+@Table(name = "endereco")
 @AllArgsConstructor
+@Getter
+@NoArgsConstructor
+@Setter
 public class EnderecoEntity {
 
 	@Id

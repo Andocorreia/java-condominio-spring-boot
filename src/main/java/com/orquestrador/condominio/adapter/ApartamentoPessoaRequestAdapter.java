@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.orquestrador.condominio.entity.ApartamentoPessoaEntity;
-import com.orquestrador.condominio.request.CadastroPessoaRequest;
+import com.orquestrador.condominio.request.CommonPessoaRequest;
 
-public class ApartamentoPessoaRequestAdapter implements Adapter<List<ApartamentoPessoaEntity>, CadastroPessoaRequest>{
+public class ApartamentoPessoaRequestAdapter implements Adapter<List<ApartamentoPessoaEntity>, CommonPessoaRequest> {
 
 	@Override
-	public List<ApartamentoPessoaEntity> convert(final CadastroPessoaRequest request) {
+	public List<ApartamentoPessoaEntity> convert(final CommonPessoaRequest request) {
 
 		final List<ApartamentoPessoaEntity> apartamentoPessoaEntity = new ArrayList<>();
 

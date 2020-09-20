@@ -22,14 +22,14 @@ import com.orquestrador.condominio.repository.ApartamentoPessoaRepository;
 import com.orquestrador.condominio.repository.EnderecoRepository;
 import com.orquestrador.condominio.repository.PessoaRepository;
 import com.orquestrador.condominio.repository.TelefoneRepository;
-import com.orquestrador.condominio.request.CadastroPessoaRequest;
+import com.orquestrador.condominio.request.CommonPessoaRequest;
 import com.orquestrador.condominio.response.CadastroPessoaResponse;
 
 @Service
 public class PessoaCadastroUseCase {
 
 	private final PessoaRequestAdapter pessoaAdapter = new PessoaRequestAdapter();
-	private PessoaEntity pessoaEntity ;
+	private PessoaEntity pessoaEntity;
 
 	@Autowired
 	ApartamentoPessoaRepository apartamentoPessoarepository;
@@ -44,7 +44,7 @@ public class PessoaCadastroUseCase {
 	TelefoneRepository telefoneRepository;
 
 	@Transactional
-	public ResponseEntity<CadastroPessoaResponse> execute(final CadastroPessoaRequest request, final UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<CadastroPessoaResponse> execute(final CommonPessoaRequest request, final UriComponentsBuilder uriBuilder) {
 
 		pessoaEntity = pessoaAdapter.convert(request);
 		final List<ApartamentoPessoaEntity> apartamentoPessoaEntity = new ApartamentoPessoaRequestAdapter().convert(request);
@@ -62,13 +62,12 @@ public class PessoaCadastroUseCase {
 		enderecoEntity.forEach(endereco -> endereco.setPessoaId(pessoaEntity));
 		enderecoRepository.saveAll(enderecoEntity);
 
-
 		return getHttpResponse(uriBuilder);
 
 	}
 
 	private ResponseEntity<CadastroPessoaResponse> getHttpResponse(final UriComponentsBuilder uriBuilder) {
-		final URI uri = uriBuilder.path("/cadastroPessoa/{pessoaId}").buildAndExpand(pessoaEntity.getId()).toUri();
+		final URI uri = uriBuilder.path("/pessoa/{pessoaId}").buildAndExpand(pessoaEntity.getId()).toUri();
 		return ResponseEntity.created(uri).body(pessoaAdapter.convert(pessoaEntity));
 	}
 }

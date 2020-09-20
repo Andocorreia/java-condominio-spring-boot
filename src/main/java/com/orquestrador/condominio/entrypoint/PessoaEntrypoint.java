@@ -10,20 +10,22 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.orquestrador.condominio.request.CadastroPessoaRequest;
+import com.orquestrador.condominio.request.CommonPessoaRequest;
 import com.orquestrador.condominio.response.CadastroPessoaResponse;
 import com.orquestrador.condominio.response.PessoaResponse;
+import com.orquestrador.condominio.usecase.PessoaAlteraUseCase;
 import com.orquestrador.condominio.usecase.PessoaCadastroUseCase;
 import com.orquestrador.condominio.usecase.PessoaConsultaUseCase;
 import com.orquestrador.condominio.usecase.pessoaDeletaUseCase;
 
 @RestController
-@RequestMapping("/cadastroPessoa")
+@RequestMapping("/pessoa")
 public class PessoaEntrypoint {
 
 	@Autowired
@@ -35,26 +37,32 @@ public class PessoaEntrypoint {
 	@Autowired
 	PessoaConsultaUseCase pessoaConsultaUseCase;
 
+	@Autowired
+	PessoaAlteraUseCase pessoaAlteraUseCase;
+
 	@PostMapping
-	public ResponseEntity<CadastroPessoaResponse> cadastro(@RequestBody @Valid final CadastroPessoaRequest request, final UriComponentsBuilder uriBuilder) {
-
+	public ResponseEntity<CadastroPessoaResponse> insert(@RequestBody @Valid final CommonPessoaRequest request, final UriComponentsBuilder uriBuilder) {
 		return pessoaCadastroUseCase.execute(request, uriBuilder);
-
 	}
 
 	@DeleteMapping("/{pessoaId}")
 	public ResponseEntity<?> delete(@PathVariable final Long pessoaId) {
-
 		return pessoaDeletaUseCase.execute(pessoaId);
 	}
 
 	@GetMapping("/{pessoaId}")
-	public Collection<PessoaResponse> consultarPessoas(@PathVariable final Long pessoaId) {
+	public Collection<PessoaResponse> search(@PathVariable final Long pessoaId) {
 		return pessoaConsultaUseCase.executa(pessoaId);
 	}
 
 	@GetMapping()
-	public Collection<PessoaResponse> consultarPessoas() {
+	public Collection<PessoaResponse> search() {
 		return pessoaConsultaUseCase.executa();
+	}
+
+	@PutMapping("/{pessoaId}")
+	public ResponseEntity<?> update(
+			@PathVariable final Long pessoaId ,@RequestBody @Valid final CommonPessoaRequest request, final UriComponentsBuilder uriBuilder) {
+		return pessoaAlteraUseCase.execute(pessoaId, request, uriBuilder);
 	}
 }
