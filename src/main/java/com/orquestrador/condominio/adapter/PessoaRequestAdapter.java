@@ -14,8 +14,6 @@ public class PessoaRequestAdapter implements Adapter<PessoaEntity, CommonPessoaR
 	public PessoaEntity convert(final CommonPessoaRequest request) {
 		final PessoaEntity pessoaEntity = new PessoaEntity();
 		transformEntityFromRequest(pessoaEntity, request);
-		//TODO Encriptar a senha
-		pessoaEntity.setSenha(request.getSenha());
 		return pessoaEntity;
 	}
 

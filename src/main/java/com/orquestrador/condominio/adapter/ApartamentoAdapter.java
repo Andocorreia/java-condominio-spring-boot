@@ -11,7 +11,9 @@ public class ApartamentoAdapter implements Adapter<Collection<ApartamentoRespons
 	@Override
 	public Collection<ApartamentoResponse> convert(final Collection<ApartamentoEntity> entity) {
 
-		return entity.stream().map(apartamento -> new ApartamentoResponse(apartamento.getBloco(), apartamento.getApartamento())).collect(Collectors.toList());
+		return entity.stream()
+				.map(apartamento -> new ApartamentoResponse(apartamento.getBloco(), apartamento.getApartamento()))
+				.collect(Collectors.toList());
 	}
 
 }

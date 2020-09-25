@@ -70,15 +70,13 @@ public class PessoaConsultaUseCase {
 		return Arrays.asList(pessoaResponse);
 	}
 
-	private List<Long> getApartamentosIds(final Collection<ApartamentoPessoaEntity> apartamentoEntity) {
-		return apartamentoEntity.stream().map(ApartamentoPessoaEntity::getApartamentoId).collect(Collectors.toList());
-	}
-
 	public Collection<PessoaResponse> executa() {
 		final List<PessoaEntity> pessoaEntity = pessoaRepository.findAll();
 		return new PessoaResponseAdpter().convert(pessoaEntity);
 	}
 
-
+	private List<Long> getApartamentosIds(final Collection<ApartamentoPessoaEntity> apartamentoEntity) {
+		return apartamentoEntity.stream().map(ApartamentoPessoaEntity::getApartamentoId).collect(Collectors.toList());
+	}
 
 }

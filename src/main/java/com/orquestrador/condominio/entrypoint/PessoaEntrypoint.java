@@ -55,14 +55,14 @@ public class PessoaEntrypoint {
 		return pessoaConsultaUseCase.executa(pessoaId);
 	}
 
-	@GetMapping()
+	@GetMapping
 	public Collection<PessoaResponse> search() {
 		return pessoaConsultaUseCase.executa();
 	}
 
 	@PutMapping("/{pessoaId}")
 	public ResponseEntity<?> update(
-			@PathVariable final Long pessoaId ,@RequestBody @Valid final CommonPessoaRequest request, final UriComponentsBuilder uriBuilder) {
+			@PathVariable final Long pessoaId, @RequestBody @Valid final CommonPessoaRequest request, final UriComponentsBuilder uriBuilder) {
 		return pessoaAlteraUseCase.execute(pessoaId, request, uriBuilder);
 	}
 }

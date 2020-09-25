@@ -49,6 +49,4 @@ public class PessoaEntity {
 	@Enumerated(EnumType.STRING)
 	private Classificacao classificacao;
 
-	private String senha;
-
 }

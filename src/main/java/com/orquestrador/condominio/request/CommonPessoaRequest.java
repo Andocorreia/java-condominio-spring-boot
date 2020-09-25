@@ -66,9 +66,6 @@ public class CommonPessoaRequest {
 	@JsonProperty
 	private final List<Long> apartamentos = new ArrayList<>();
 
-	@JsonProperty
-	private String senha;
-
 	@Getter
 	public static class Endereco {
 		@NotNull
