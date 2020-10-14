@@ -46,6 +46,8 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	protected void configure(final HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers(HttpMethod.POST, "/login").permitAll()
+		.antMatchers(HttpMethod.GET, "/actuator").permitAll()
+		.antMatchers(HttpMethod.GET, "/actuator/*").permitAll()
 		.antMatchers(HttpMethod.DELETE, "/pessoa").hasRole(PerfilUsuario.ADMINISTRADOR.getDescricao())
 		.anyRequest().authenticated()
 		.and().csrf().disable()
@@ -56,6 +58,8 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(final WebSecurity web) throws Exception {
+		web.ignoring()
+		.antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**");
 	}
 
 }

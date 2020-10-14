@@ -71,6 +71,6 @@ public class PessoaCadastroUseCase {
 
 	private ResponseEntity<CadastroPessoaResponse> getHttpResponse(final UriComponentsBuilder uriBuilder) {
 		final URI uri = uriBuilder.path("/pessoa/{pessoaId}").buildAndExpand(pessoaEntity.getId()).toUri();
-		return ResponseEntity.created(uri).body(pessoaAdapter.convert(pessoaEntity));
+		return ResponseEntity.created(uri).body(new CadastroPessoaResponse(pessoaEntity.getId()));
 	}
 }

@@ -1,8 +1,5 @@
 package com.condominio.backend.request;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,13 +13,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsuarioRequest extends UsuarioCommonRequest {
-
-	@JsonProperty
-	protected Long pessoaId;
+public class UsuarioCommonRequest {
 	@NotEmpty
 	@JsonProperty
-	private String senha;
-	@JsonProperty
-	private Collection<String> perfis = new ArrayList<>();
+	protected String usuario;
 }

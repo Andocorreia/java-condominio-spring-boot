@@ -2,15 +2,14 @@ package com.condominio.backend.usecase;
 
 import java.util.Optional;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.condominio.backend.adapter.PessoaRequestAdapter;
+import com.condominio.backend.configuration.exception.UnprocessableEntityException;
 import com.condominio.backend.entity.PessoaEntity;
 import com.condominio.backend.repository.PessoaRepository;
 import com.condominio.backend.request.PessoaRequest;
-import com.condominio.backend.response.CadastroPessoaResponse;
 
 @Service
 public class PessoaAlteraUseCase {
@@ -21,18 +20,17 @@ public class PessoaAlteraUseCase {
 		this.pessoaRepository = pessoaRepository;
 	}
 
-	public ResponseEntity<CadastroPessoaResponse> execute(
+	public void execute(
 			final Long pessoaId, final PessoaRequest request, final UriComponentsBuilder uriBuilder) {
 
 		final Optional<PessoaEntity> pessoa = pessoaRepository.findById(pessoaId);
-		if (pessoa.isPresent()) {
-			final PessoaRequestAdapter pessoaAdapter = new PessoaRequestAdapter();
-			final PessoaEntity pessoaEntity = pessoaAdapter.convert(pessoa.get(), request);
-			pessoaRepository.save(pessoaEntity);
-			return ResponseEntity.accepted().build();
+		if (!pessoa.isPresent()) {
+			throw new UnprocessableEntityException("pessoa", "pessoa não cadastrada");
 		}
 
-		return ResponseEntity.notFound().build();
+		final PessoaRequestAdapter pessoaAdapter = new PessoaRequestAdapter();
+		final PessoaEntity pessoaEntity = pessoaAdapter.convert(pessoa.get(), request);
+		pessoaRepository.save(pessoaEntity);
 	}
 
 }

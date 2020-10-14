@@ -4,6 +4,8 @@ import java.util.Collection;
 
 import javax.validation.Valid;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,16 +48,19 @@ public class PessoaEntryPoint {
 	}
 
 	@PostMapping
+	@CacheEvict(value = "pessoaSearch", allEntries = true)
 	public ResponseEntity<CadastroPessoaResponse> insert(@RequestBody @Valid final PessoaRequest request, final UriComponentsBuilder uriBuilder) {
 		return pessoaCadastroUseCase.execute(request, uriBuilder);
 	}
 
 	@DeleteMapping("/{pessoaId}")
-	public ResponseEntity<?> delete(@PathVariable final Long pessoaId) {
-		return pessoaDeletaUseCase.execute(pessoaId);
+	@CacheEvict(value = "pessoaSearch", allEntries = true)
+	public void delete(@PathVariable final Long pessoaId) {
+		pessoaDeletaUseCase.execute(pessoaId);
 	}
 
 	@GetMapping("/{pessoaId}")
+	@Cacheable("pessoaSearch")
 	public Collection<PessoaResponse> search(@PathVariable final Long pessoaId) {
 		return pessoaConsultaUseCase.executa(pessoaId);
 	}
@@ -66,8 +71,9 @@ public class PessoaEntryPoint {
 	}
 
 	@PutMapping("/{pessoaId}")
-	public ResponseEntity<?> update(
+	@CacheEvict(value = "pessoaSearch", allEntries = true)
+	public void update(
 			@PathVariable final Long pessoaId, @RequestBody @Valid final PessoaRequest request, final UriComponentsBuilder uriBuilder) {
-		return pessoaAlteraUseCase.execute(pessoaId, request, uriBuilder);
+		pessoaAlteraUseCase.execute(pessoaId, request, uriBuilder);
 	}
 }

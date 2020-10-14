@@ -5,8 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum PerfilUsuario {
-	ADMINISTRADOR("ROLE_ADMINISTRADOR");
-
-	private String descricao;
+public enum ExpiracaoSenha {
+	DIAS(30);
+	private Integer dias;
 }

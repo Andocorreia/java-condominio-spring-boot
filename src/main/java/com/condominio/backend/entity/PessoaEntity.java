@@ -2,6 +2,7 @@ package com.condominio.backend.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -34,13 +35,16 @@ public class PessoaEntity {
 
 	private String nome;
 	private LocalDate dataNascimento;
+	@Column(unique = true)
 	private String cpf;
+	@Column(unique = true)
 	private String rg;
 
 	@Enumerated(EnumType.STRING)
 	private EstadoCivil estadoCivil;
 
 	private Sexo sexo;
+	@Column(unique = true)
 	private String email;
 
 	@Enumerated(EnumType.STRING)

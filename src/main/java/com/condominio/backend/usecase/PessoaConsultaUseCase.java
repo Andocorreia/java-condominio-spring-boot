@@ -13,6 +13,7 @@ import com.condominio.backend.adapter.ApartamentoAdapter;
 import com.condominio.backend.adapter.EnderecoResponseAdapter;
 import com.condominio.backend.adapter.PessoaResponseAdpter;
 import com.condominio.backend.adapter.TelefoneResponseAdapter;
+import com.condominio.backend.configuration.exception.NoContentException;
 import com.condominio.backend.entity.ApartamentoEntity;
 import com.condominio.backend.entity.ApartamentoPessoaEntity;
 import com.condominio.backend.entity.EnderecoEntity;
@@ -52,8 +53,9 @@ public class PessoaConsultaUseCase {
 		final Optional<PessoaEntity> pessoaOptional = pessoaRepository.findById(pessoaId);
 
 		if (!pessoaOptional.isPresent()) {
-			return Collections.emptyList();
+			throw new NoContentException();
 		}
+
 		final PessoaEntity pessoaEntity = pessoaOptional.get();
 
 		final PessoaResponse pessoaResponse = new PessoaResponseAdpter().convert(pessoaEntity);
@@ -73,7 +75,12 @@ public class PessoaConsultaUseCase {
 	}
 
 	public Collection<PessoaResponse> executa() {
+
 		final List<PessoaEntity> pessoaEntity = pessoaRepository.findAll();
+		if (!pessoaEntity.isEmpty()) {
+			throw new NoContentException();
+		}
+
 		return new PessoaResponseAdpter().convert(pessoaEntity);
 	}
 

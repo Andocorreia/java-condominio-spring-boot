@@ -2,14 +2,18 @@ package com.condominio.backend.entrypoint;
 
 import javax.validation.Valid;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import com.condominio.backend.request.UsuarioCommonRequest;
 import com.condominio.backend.request.UsuarioRequest;
+import com.condominio.backend.response.CadastroUsuarioResponse;
 import com.condominio.backend.usecase.UsuarioAlterarSenhaUseCase;
 import com.condominio.backend.usecase.UsuarioBloquearUseCase;
 import com.condominio.backend.usecase.UsuarioCadastrarUseCase;
@@ -37,17 +41,17 @@ public class UsuarioEntryPoint {
 	}
 
 	@PostMapping
-	public void cadastrar(@RequestBody @Valid final UsuarioRequest request) {
-		usuarioCadastrarUseCase.execute(request);
+	public ResponseEntity<CadastroUsuarioResponse> cadastrar(@RequestBody @Valid final UsuarioRequest request, final UriComponentsBuilder uriBuilder) {
+		return usuarioCadastrarUseCase.execute(request, uriBuilder);
 	}
 
-	@PutMapping("/bloquear/{usuario}")
-	public void bloquear(@PathVariable final String usuario) {
+	@PutMapping("/bloquear")
+	public void bloquear(@RequestBody @Valid final UsuarioCommonRequest usuario) {
 		usuarioBloquearUseCase.execute(usuario);
 	}
 
 	@PutMapping("/desbloquear/{usuario}")
-	public void desbloquear(@PathVariable final String usuario) {
+	public void desbloquear(@PathVariable @Valid final UsuarioCommonRequest usuario) {
 		usuarioDesbloquearUseCase.execute(usuario);
 	}
 
