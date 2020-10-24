@@ -1,7 +1,7 @@
 package com.condominio.backend.adapter;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.condominio.backend.core.enums.TipoEndereco;
 import com.condominio.backend.entity.EnderecoEntity;
@@ -11,9 +11,7 @@ public class EnderecoRequestAdapter implements Adapter<List<EnderecoEntity>, Pes
 
 	@Override
 	public List<EnderecoEntity> convert(final PessoaRequest request) {
-		final List<EnderecoEntity> enderecoEntity = new ArrayList<>();
-
-		request.getEnderecos().stream().forEach(endereco -> {
+		return request.getEnderecos().stream().map(endereco -> {
 			final EnderecoEntity entity = new EnderecoEntity();
 			entity.setTipo(TipoEndereco.valueOf(endereco.getTipo().toUpperCase()));
 			entity.setRua(endereco.getRua());
@@ -24,10 +22,9 @@ public class EnderecoRequestAdapter implements Adapter<List<EnderecoEntity>, Pes
 			entity.setCidade(endereco.getCidade());
 			entity.setUf(endereco.getUf());
 			entity.setPais(endereco.getPais());
-			enderecoEntity.add(entity);
-		});
+			return entity;
+		}).collect(Collectors.toList());
 
-		return enderecoEntity;
 	}
 
 }

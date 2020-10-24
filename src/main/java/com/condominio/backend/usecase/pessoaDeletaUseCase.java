@@ -2,6 +2,8 @@ package com.condominio.backend.usecase;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.condominio.backend.configuration.exception.UnprocessableEntityException;
@@ -18,6 +20,7 @@ public class pessoaDeletaUseCase {
 		this.pessoaRepository = pessoaRepository;
 	}
 
+	@Transactional
 	public void execute(final Long pessoaId) {
 
 		final Optional<PessoaEntity> pessoa = pessoaRepository.findById(pessoaId);

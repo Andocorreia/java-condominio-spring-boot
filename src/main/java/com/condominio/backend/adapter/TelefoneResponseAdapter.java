@@ -10,16 +10,13 @@ public class TelefoneResponseAdapter implements Adapter<Collection<TelefoneRespo
 
 	@Override
 	public Collection<TelefoneResponse> convert(final Collection<TelefoneEntity> entity) {
-		return entity.stream().map(this::getResponseFromEntity).collect(Collectors.toList());
+		return entity.stream().map(telefoneEntity -> {
+			final TelefoneResponse telefone = new TelefoneResponse();
+			telefone.setId(telefoneEntity.getId());
+			telefone.setNumero(telefoneEntity.getNumero());
+			telefone.setComplemento(telefoneEntity.getComplemento());
+			telefone.setTipo(telefoneEntity.getTipo());
+			return telefone;
+		}).collect(Collectors.toList());
 	}
-
-	private TelefoneResponse getResponseFromEntity(final TelefoneEntity entity) {
-		final TelefoneResponse telefone = new TelefoneResponse();
-		telefone.setId(entity.getId());
-		telefone.setNumero(entity.getNumero());
-		telefone.setComplemento(entity.getComplemento());
-		telefone.setTipo(entity.getTipo());
-		return telefone;
-	}
-
 }

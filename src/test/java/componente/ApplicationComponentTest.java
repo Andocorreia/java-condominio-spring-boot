@@ -1,6 +1,5 @@
-package componente.com.condominio.back;
+package componente;
 
-import org.junit.jupiter.api.Tag;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -13,9 +12,7 @@ import com.condominio.backend.Application;
 @RunWith(SpringRunner.class)
 @DirtiesContext
 @ActiveProfiles("TEST")
-@Tag("Componente")
-public abstract class ApplicationComponenteTest {
-
+public abstract class ApplicationComponentTest {
 
 }
 

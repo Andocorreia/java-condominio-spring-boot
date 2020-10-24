@@ -60,6 +60,7 @@ public class PessoaRequest {
 	private final List<Long> apartamentos = new ArrayList<>();
 
 	@Getter
+	@Setter
 	public static class Endereco {
 		@NotEmpty
 		@JsonProperty
@@ -100,6 +101,7 @@ public class PessoaRequest {
 	}
 
 	@Getter
+	@Setter
 	public static class Telefone {
 
 		@NotEmpty

@@ -17,25 +17,23 @@ public class PessoaRequestAdapter implements Adapter<PessoaEntity, PessoaRequest
 	}
 
 	public PessoaEntity convert(final PessoaEntity pessoa, final PessoaRequest request) {
-		transformEntityFromRequest(pessoa, request);
+		pessoa.setNome(request.getNome());
+		pessoa.setDataNascimento(convertStringToData(request.getDataNascimento()));
+		pessoa.setCpf(request.getCpf());
+		pessoa.setRg(request.getRg());
+		pessoa.setEstadoCivil(EstadoCivil.valueOf(request.getEstadoCivil().toUpperCase()));
+		pessoa.setSexo(Sexo.valueOf(request.getSexo()));
+		pessoa.setEmail(request.getEmail());
+		pessoa.setClassificacao(Classificacao.valueOf(request.getClassificacao().toUpperCase()));
+		pessoa.setSituacao(Situacao.ATIVO);
+
 		return pessoa;
 	}
 
-	private PessoaEntity transformEntityFromRequest(final PessoaEntity pessoaEntity, final PessoaRequest request) {
-		final int ano = Integer.parseInt(request.getDataNascimento().substring(0, 4));
-		final int mes = Integer.parseInt(request.getDataNascimento().substring(5, 7));
-		final int dia = Integer.parseInt(request.getDataNascimento().substring(8, 10));
-
-		pessoaEntity.setNome(request.getNome());
-		pessoaEntity.setDataNascimento(LocalDate.of(ano, mes, dia));
-		pessoaEntity.setCpf(request.getCpf());
-		pessoaEntity.setRg(request.getRg());
-		pessoaEntity.setEstadoCivil(EstadoCivil.valueOf(request.getEstadoCivil().toUpperCase()));
-		pessoaEntity.setSexo(Sexo.valueOf(request.getSexo()));
-		pessoaEntity.setEmail(request.getEmail());
-		pessoaEntity.setClassificacao(Classificacao.valueOf(request.getClassificacao().toUpperCase()));
-		pessoaEntity.setSituacao(Situacao.ATIVO);
-
-		return pessoaEntity;
+	private LocalDate convertStringToData(final String dataNascimento) {
+		final int ano = Integer.parseInt(dataNascimento.substring(0, 4));
+		final int mes = Integer.parseInt(dataNascimento.substring(5, 7));
+		final int dia = Integer.parseInt(dataNascimento.substring(8, 10));
+		return LocalDate.of(ano, mes, dia);
 	}
 }

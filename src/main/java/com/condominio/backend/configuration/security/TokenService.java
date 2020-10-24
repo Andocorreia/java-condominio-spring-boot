@@ -53,7 +53,6 @@ public class TokenService {
 		.setIssuedAt(dataAtual)
 		.setExpiration(dataExpiracao)
 		.signWith(SignatureAlgorithm.HS256, secret).compact();
-
 	}
 
 	private String getToken(final String token) {

@@ -49,7 +49,7 @@ public class PessoaConsultaUseCase {
 		this.telefoneRepository = telefoneRepository;
 	}
 
-	public Collection<PessoaResponse> executa(final Long pessoaId) {
+	public Collection<PessoaResponse> execute(final Long pessoaId) {
 		final Optional<PessoaEntity> pessoaOptional = pessoaRepository.findById(pessoaId);
 
 		if (!pessoaOptional.isPresent()) {
@@ -74,7 +74,7 @@ public class PessoaConsultaUseCase {
 		return Arrays.asList(pessoaResponse);
 	}
 
-	public Collection<PessoaResponse> executa() {
+	public Collection<PessoaResponse> execute() {
 
 		final List<PessoaEntity> pessoaEntity = pessoaRepository.findAll();
 		if (!pessoaEntity.isEmpty()) {

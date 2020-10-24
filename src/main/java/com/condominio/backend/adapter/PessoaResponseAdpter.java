@@ -13,7 +13,6 @@ public class PessoaResponseAdpter implements Adapter<Collection<PessoaResponse>,
 	}
 
 	public PessoaResponse convert(final PessoaEntity pessoa) {
-
 		return getReponseFromEntity(pessoa);
 	}
 

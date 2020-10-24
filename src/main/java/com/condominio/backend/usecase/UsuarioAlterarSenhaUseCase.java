@@ -3,6 +3,8 @@ package com.condominio.backend.usecase;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.condominio.backend.configuration.exception.UnprocessableEntityException;
@@ -19,6 +21,7 @@ public class UsuarioAlterarSenhaUseCase {
 		this.usuarioRepository = usuarioRepository;
 	}
 
+	@Transactional
 	public void execute(final UsuarioRequest request) {
 
 		final Optional<UsuarioEntity> optionalUsuario = usuarioRepository.findByUsuario(request.getUsuario());

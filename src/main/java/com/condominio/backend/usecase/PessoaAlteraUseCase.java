@@ -2,6 +2,8 @@ package com.condominio.backend.usecase;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -20,6 +22,7 @@ public class PessoaAlteraUseCase {
 		this.pessoaRepository = pessoaRepository;
 	}
 
+	@Transactional
 	public void execute(
 			final Long pessoaId, final PessoaRequest request, final UriComponentsBuilder uriBuilder) {
 

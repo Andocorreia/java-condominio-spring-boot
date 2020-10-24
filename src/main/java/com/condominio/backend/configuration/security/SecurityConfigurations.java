@@ -13,7 +13,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.condominio.backend.core.enums.PerfilUsuario;
 import com.condominio.backend.repository.UsuarioRepository;
 
 @EnableWebSecurity
@@ -48,7 +47,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.POST, "/login").permitAll()
 		.antMatchers(HttpMethod.GET, "/actuator").permitAll()
 		.antMatchers(HttpMethod.GET, "/actuator/*").permitAll()
-		.antMatchers(HttpMethod.DELETE, "/pessoa").hasRole(PerfilUsuario.ADMINISTRADOR.getDescricao())
+		.antMatchers(HttpMethod.DELETE, "/pessoa/*").hasRole("ADMINISTRATOR")
 		.anyRequest().authenticated()
 		.and().csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

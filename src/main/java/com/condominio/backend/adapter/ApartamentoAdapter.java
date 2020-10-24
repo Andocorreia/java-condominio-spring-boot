@@ -13,7 +13,12 @@ public class ApartamentoAdapter implements Adapter<Collection<ApartamentoRespons
 
 		return entity.stream()
 				.map(apartamento -> new ApartamentoResponse(apartamento.getBloco(), apartamento.getApartamento()))
-				.collect(Collectors.toList());
+				.sorted((a1, a2) -> {
+					if (a1.getBloco().compareTo(a2.getBloco()) == 0) {
+						return a1.getApartamento().compareTo(a2.getApartamento());
+					}
+					return a1.getBloco().compareTo(a2.getBloco());
+				}).collect(Collectors.toList());
 	}
 
 }

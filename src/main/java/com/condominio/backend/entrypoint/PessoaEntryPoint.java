@@ -62,12 +62,12 @@ public class PessoaEntryPoint {
 	@GetMapping("/{pessoaId}")
 	@Cacheable("pessoaSearch")
 	public Collection<PessoaResponse> search(@PathVariable final Long pessoaId) {
-		return pessoaConsultaUseCase.executa(pessoaId);
+		return pessoaConsultaUseCase.execute(pessoaId);
 	}
 
 	@GetMapping
 	public Collection<PessoaResponse> search() {
-		return pessoaConsultaUseCase.executa();
+		return pessoaConsultaUseCase.execute();
 	}
 
 	@PutMapping("/{pessoaId}")

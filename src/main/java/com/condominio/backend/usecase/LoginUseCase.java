@@ -1,6 +1,8 @@
 package com.condominio.backend.usecase;
 
 
+import javax.transaction.Transactional;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
@@ -23,6 +25,7 @@ public class LoginUseCase {
 		this.tokenService = tokenService;
 	}
 
+	@Transactional
 	public ResponseEntity<?> execute(final LoginRequest request) {
 
 		try {

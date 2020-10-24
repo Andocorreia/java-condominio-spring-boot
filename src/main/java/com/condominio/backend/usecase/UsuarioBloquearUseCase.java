@@ -2,6 +2,8 @@ package com.condominio.backend.usecase;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.condominio.backend.configuration.exception.UnprocessableEntityException;
@@ -18,6 +20,7 @@ public class UsuarioBloquearUseCase {
 		this.usuarioRepository = usuarioRepository;
 	}
 
+	@Transactional
 	public void execute(final UsuarioCommonRequest request) {
 
 		final Optional<UsuarioEntity> optionalUsuario = usuarioRepository.findByUsuario(request.getUsuario());

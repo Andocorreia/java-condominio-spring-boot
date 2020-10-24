@@ -1,6 +1,6 @@
-package integracao.com.condominio.back;
+package integracao;
 
-import org.junit.jupiter.api.Tag;
+
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -13,8 +13,7 @@ import com.condominio.backend.Application;
 @RunWith(SpringRunner.class)
 @DirtiesContext
 @ActiveProfiles("TEST")
-@Tag("Integrado")
-public abstract class ApplicationIntegradoTest {
+public abstract class ApplicationIntegrationTest {
 
 
 }

@@ -10,22 +10,19 @@ public class EnderecoResponseAdapter implements Adapter<Collection<EnderecoRespo
 
 	@Override
 	public Collection<EnderecoResponse> convert(final Collection<EnderecoEntity> entity) {
-		return entity.stream().map(this::getResponseFromEntity).collect(Collectors.toList());
+		return entity.stream().map(entityEndereco -> {
+			final EnderecoResponse endereco = new EnderecoResponse();
+			endereco.setId(entityEndereco.getId());
+			endereco.setTipo(entityEndereco.getTipo());
+			endereco.setRua(entityEndereco.getRua());
+			endereco.setNumero(entityEndereco.getNumero());
+			endereco.setComplemento(entityEndereco.getComplemento());
+			endereco.setCep(entityEndereco.getCep());
+			endereco.setBairro(entityEndereco.getBairro());
+			endereco.setCidade(entityEndereco.getCidade());
+			endereco.setUf(entityEndereco.getUf());
+			endereco.setPais(entityEndereco.getPais());
+			return endereco;
+		}).collect(Collectors.toList());
 	}
-
-	private EnderecoResponse getResponseFromEntity(final EnderecoEntity entity) {
-		final EnderecoResponse endereco = new EnderecoResponse();
-		endereco.setId(entity.getId());
-		endereco.setTipo(entity.getTipo());
-		endereco.setRua(entity.getRua());
-		endereco.setNumero(entity.getNumero());
-		endereco.setComplemento(entity.getComplemento());
-		endereco.setCep(entity.getCep());
-		endereco.setBairro(entity.getBairro());
-		endereco.setCidade(entity.getCidade());
-		endereco.setUf(entity.getUf());
-		endereco.setPais(entity.getPais());
-		return endereco;
-	}
-
 }

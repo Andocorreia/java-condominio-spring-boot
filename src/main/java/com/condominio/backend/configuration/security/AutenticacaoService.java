@@ -20,7 +20,7 @@ public class AutenticacaoService implements UserDetailsService {
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(final String username) {
 		final Optional<UsuarioEntity> usuario = usuarioRepository.findByUsuario(username);
 
 		if (usuario.isPresent()) {
