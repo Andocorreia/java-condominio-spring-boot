@@ -52,7 +52,7 @@ public class PessoaRequestFixture implements TemplateLoader {
 			{
 				add("numero", "147852369");
 				add("complemento", "Teste 3");
-				add("tipo", "recados");
+				add("tipo", "recado");
 			}
 		});
 

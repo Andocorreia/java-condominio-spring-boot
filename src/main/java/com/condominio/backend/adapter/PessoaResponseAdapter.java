@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import com.condominio.backend.entity.PessoaEntity;
 import com.condominio.backend.response.PessoaResponse;
 
-public class PessoaResponseAdpter implements Adapter<Collection<PessoaResponse>, Collection<PessoaEntity>> {
+public class PessoaResponseAdapter implements Adapter<Collection<PessoaResponse>, Collection<PessoaEntity>> {
 	@Override
 	public Collection<PessoaResponse> convert(final Collection<PessoaEntity> entity) {
 		return entity.stream().map(this::getReponseFromEntity).collect(Collectors.toList());

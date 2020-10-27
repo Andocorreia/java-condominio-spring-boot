@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum PerfilUsuario {
-	ADMINISTRADOR("ADMINISTRADOR");
+	ADMINISTRADOR("ADMINISTRADOR"), PORTARIA("portaria");
 
 	private String descricao;
 }

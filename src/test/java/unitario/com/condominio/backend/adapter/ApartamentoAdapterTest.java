@@ -26,7 +26,7 @@ class ApartamentoAdapterTest extends ApplicationUnitTests {
 	}
 
 	@Test
-	void dadoApartamentosEntityValidosQuandoPassarPeloAdapterRetornaResponseValidaOrdenadaDeveSerRetornada() {
+	void dadoApartamentosEntityValidosQuandoPassarPeloAdapterEntãoUmResponseValidaOrdenadaDeveSerRetornada() {
 		// Dado
 		final Collection<ApartamentoEntity> entityArray = Fixture.from(ApartamentoEntity.class).gimme(5, "valid1", "valid2", "valid3", "valid4", "valid5");
 

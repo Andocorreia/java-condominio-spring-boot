@@ -6,6 +6,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum TipoTelefone {
-	RESIDENCIAL("RESIDENCIAL"), COMERCIAL("COMERCIAL"), CELULAR("CELULAR"), OUTROS("OUTROS");
+	RESIDENCIAL("RESIDENCIAL"), COMERCIAL("COMERCIAL"), CELULAR("CELULAR"), OUTROS("OUTROS"), RECADO("RECADO");
 	private String descricao;
 }

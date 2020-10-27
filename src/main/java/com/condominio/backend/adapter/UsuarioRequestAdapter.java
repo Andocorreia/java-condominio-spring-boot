@@ -1,9 +1,9 @@
 package com.condominio.backend.adapter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.condominio.backend.core.enums.PerfilUsuario;
 import com.condominio.backend.entity.PerfilEntity;
@@ -30,7 +30,7 @@ public class UsuarioRequestAdapter implements Adapter<UsuarioEntity, UsuarioRequ
 		final Optional<PessoaEntity> pessoaEntity = pessoaRepository.findById(request.getPessoaId());
 		final List<PerfilEntity> perfis = getPerfis(request);
 
-		if (pessoaEntity.isPresent() && !perfis.isEmpty()) {
+		if (pessoaEntity.isPresent() && perfis.size() > 0) {
 			entity.setUsuario(request.getUsuario());
 			entity.setSenha(request.getSenha());
 			entity.setBloqueado(false);
@@ -42,12 +42,15 @@ public class UsuarioRequestAdapter implements Adapter<UsuarioEntity, UsuarioRequ
 	}
 
 	private List<PerfilEntity> getPerfis(final UsuarioRequest request) {
-		return request.getPerfis().stream().map(nome -> {
-			final Optional<PerfilEntity> perfil = perfilRepository.findByNome(PerfilUsuario.valueOf(nome));
+		final List<PerfilEntity> perfis = new ArrayList<>();
+
+		request.getPerfis().stream().forEach(nome -> {
+			final Optional<PerfilEntity> perfil = perfilRepository.findByNome(PerfilUsuario.valueOf(nome.toUpperCase()));
+
 			if (perfil.isPresent()) {
-				return perfil.get();
+				perfis.add(perfil.get());
 			}
-			return null;
-		}).collect(Collectors.toList());
+		});
+		return perfis;
 	}
 }

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.condominio.backend.adapter.ApartamentoAdapter;
 import com.condominio.backend.adapter.EnderecoResponseAdapter;
-import com.condominio.backend.adapter.PessoaResponseAdpter;
+import com.condominio.backend.adapter.PessoaResponseAdapter;
 import com.condominio.backend.adapter.TelefoneResponseAdapter;
 import com.condominio.backend.configuration.exception.NoContentException;
 import com.condominio.backend.entity.ApartamentoEntity;
@@ -58,7 +58,7 @@ public class PessoaConsultaUseCase {
 
 		final PessoaEntity pessoaEntity = pessoaOptional.get();
 
-		final PessoaResponse pessoaResponse = new PessoaResponseAdpter().convert(pessoaEntity);
+		final PessoaResponse pessoaResponse = new PessoaResponseAdapter().convert(pessoaEntity);
 
 		final Collection<EnderecoEntity> enderecos = enderecoRepository.findByPessoaId(pessoaEntity).orElse(Collections.emptyList());
 		final Collection<TelefoneEntity> telefones = telefoneRepository.findByPessoaId(pessoaEntity).orElse(Collections.emptyList());
@@ -81,7 +81,7 @@ public class PessoaConsultaUseCase {
 			throw new NoContentException();
 		}
 
-		return new PessoaResponseAdpter().convert(pessoaEntity);
+		return new PessoaResponseAdapter().convert(pessoaEntity);
 	}
 
 	private List<Long> getApartamentosIds(final Collection<ApartamentoPessoaEntity> apartamentoEntity) {

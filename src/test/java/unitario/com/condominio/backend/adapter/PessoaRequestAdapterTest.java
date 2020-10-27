@@ -60,7 +60,7 @@ public class PessoaRequestAdapterTest extends ApplicationUnitTests {
 		final PessoaEntity entity = adapter.convert(pessoaEntity, request);
 
 		// Então
-		assertNull(entity.getId());
+		assertEquals(pessoaEntity.getId(), entity.getId());
 		assertEquals(request.getNome(), entity.getNome());
 		assertEquals(convertStringToData(request.getDataNascimento()), entity.getDataNascimento());
 		assertEquals(request.getCpf(), entity.getCpf());
