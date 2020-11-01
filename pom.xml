@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.orquestrador.backend</groupId>
-	<artifactId>back-condominio</artifactId>
+	<artifactId>java-condominio-spring-boot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>back-condominio</name>
-	<description>Demo project for Spring Boot</description>
+	<name>java-condominio-spring-boot</name>
+	<description>Project for Spring Boot</description>
 
 	<properties>
 		<java.version>1.8</java.version>

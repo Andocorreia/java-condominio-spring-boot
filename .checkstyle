@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <fileset-config file-format-version="1.2.0" simple-config="false" sync-formatter="false">
-  <local-check-config name="maven-checkstyle-plugin checkstyle-validation" location="file:/home/andreoc/Documents/Projetos/treinamento/back-condominio/checkstyle.xml" type="remote" description="maven-checkstyle-plugin configuration checkstyle-validation">
-    <property name="checkstyle.header.file" value="/home/andreoc/Documents/Projetos/Bradesco/workspace-eclipse/treinamento/.metadata/.plugins/org.eclipse.core.resources/.projects/back-condominio/com.basistech.m2e.code.quality.checkstyleConfigurator/checkstyle-header-checkstyle-validation.txt"/>
+  <local-check-config name="maven-checkstyle-plugin checkstyle-validation" location="file:/home/andreoc/Documents/Projetos/treinamento/java-condominio-spring-boot/checkstyle.xml" type="remote" description="maven-checkstyle-plugin configuration checkstyle-validation">
+    <property name="checkstyle.header.file" value="/home/andreoc/Documents/Projetos/Bradesco/workspace-eclipse/treinamento-spring/.metadata/.plugins/org.eclipse.core.resources/.projects/java-condominio-spring-boot/com.basistech.m2e.code.quality.checkstyleConfigurator/checkstyle-header-checkstyle-validation.txt"/>
     <property name="checkstyle.cache.file" value="${project_loc}/target/checkstyle-cachefile"/>
   </local-check-config>
   <fileset name="java-sources-checkstyle-validation" enabled="true" check-config-name="maven-checkstyle-plugin checkstyle-validation" local="true">
