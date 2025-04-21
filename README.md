@@ -1,6 +1,7 @@
 # back-condominio Spring-Boot
+Projeto Java com os endpoints sobre um possovel sistema de gestão de condominio.
 
-##Stack
+## Stack
 * Java 8
 * SpringBoot
 * Spring Data
@@ -8,10 +9,10 @@
 * Lombok
 * JUnit
 
-##Banco de Dados
+## Banco de Dados
 * MySql
 
-###Inserts Iniciais
+### Inserts Iniciais
 
 INSERT INTO condominio.pessoa
 (classificacao, cpf, dataNascimento, email, estadoCivil, nome, rg, sexo, situacao)
